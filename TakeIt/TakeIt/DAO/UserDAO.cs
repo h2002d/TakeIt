@@ -54,22 +54,40 @@ namespace TakeIt.DAO
             {
                 using (SqlCommand command = new SqlCommand("RegisterUser", sqlConnection))
                 {
-                  
-                        sqlConnection.Open();
-                        command.CommandType = CommandType.StoredProcedure;
 
-                        command.Parameters.AddWithValue("@username", username);
-                        command.Parameters.AddWithValue("@email", email);
-                        command.Parameters.AddWithValue("@password", password);
-                        command.Parameters.AddWithValue("@profilepicture", profilepicture);
+                    sqlConnection.Open();
+                    command.CommandType = CommandType.StoredProcedure;
 
-                        command.Parameters.AddWithValue("@phone", phone);
-                        command.ExecuteNonQuery();
+                    command.Parameters.AddWithValue("@username", username);
+                    command.Parameters.AddWithValue("@email", email);
+                    command.Parameters.AddWithValue("@password", password);
+                    command.Parameters.AddWithValue("@profilepicture", profilepicture);
 
-                    
-                  
+                    command.Parameters.AddWithValue("@phone", phone);
+                    command.ExecuteNonQuery();
+
+
+
                 }
             }
+        }
+
+        public static int userLogin(string username, string password)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("UserLoginSP", sqlConnection))
+                {
+
+                    sqlConnection.Open();
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@Username", username);
+                    command.Parameters.AddWithValue("@password", password);
+                    return Convert.ToInt32(command.ExecuteScalar());
+                }
+            }
+
         }
     }
 }

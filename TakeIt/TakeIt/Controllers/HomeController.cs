@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using TakeIt.Models;
@@ -17,6 +18,28 @@ namespace TakeIt.Controllers
             return View();
         }
 
+        [HttpPost]
+        public int Login(string username, string password)
+        {
+            int userId=TakeIt.Models.User.Login(username,password);
+            if (userId.Equals(0))
+                throw new HttpUnhandledException();
+            else
+            {
+                HttpCookie StudentCookies = new HttpCookie("userkey");
+                StudentCookies.Value = userId.ToString();
+                StudentCookies.Expires = DateTime.Now.AddDays(1);
+                CookieSecurityProvider.Encrypt(StudentCookies);
+                Response.SetCookie(StudentCookies);
+            }
+            return 0;
+        }
+
+        public ActionResult SignUp()
+        {
+            return View();
+        }
+    
         //
         // GET: /Home/Details/5
 
@@ -39,6 +62,7 @@ namespace TakeIt.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult Register(User user)
         {
@@ -52,6 +76,7 @@ namespace TakeIt.Controllers
                 return View("Registration");
             }
         }
+
         public ActionResult Create()
         {
             return View();

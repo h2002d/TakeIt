@@ -13,12 +13,9 @@ namespace TakeIt.Models
         public string Username { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-
         public string PhoneNumber { get; set; }
         public string ProflePicture { get; set; }
-
-
-
+        
         public User()
         {
 
@@ -27,10 +24,10 @@ namespace TakeIt.Models
         {
             return UserDAO.getUserById(id);
         }
-        public static User Login(string username, string password)
+        public static int Login(string username, string password)
         {
 
-            return null;
+            return UserDAO.userLogin(username,password);
         }
 
         public void Register()
@@ -38,7 +35,6 @@ namespace TakeIt.Models
             UserDAO.registerUser(this.Username, this.Email, this.Password,
                 this.PhoneNumber, this.ProflePicture);
         }
-
-
+        
     }
 }
