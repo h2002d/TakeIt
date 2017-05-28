@@ -4,30 +4,3 @@
 }
 
 <h2>TakeIt</h2>
-<input type="text" id="username" placeholder="Username..."/>
-<input type="password" id="password" placeholder="Password..." />
-<input type="button" id="loginButton" value="Log in"/>
-<input type="button" id="signupButton" value="Sign Up" />
-<script>
-    $('#signupButton').on('click', function () {
-        location.href = '/Home/SignUp';
-    });
-    $('#loginButton').on('click', function () {
-        $.ajax({
-            url: '/Home/Login',
-            type: 'POST',
-            data: JSON.stringify({
-                username: $('#username').val(),
-                password: $('#password').val()
-               
-            }),
-            contentType: 'application/json; charset=utf-8',
-            success: function () {
-                alert("Logged In");
-            },
-            error: function (data) {
-                console.log(data);
-            }
-        });
-    })
-</script>

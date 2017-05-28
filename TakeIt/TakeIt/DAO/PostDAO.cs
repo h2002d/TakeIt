@@ -64,7 +64,7 @@ namespace TakeIt.DAO
 
         }
 
-        public static bool savePost(Post newPost)
+        public static Post savePost(Post newPost)
         {
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
@@ -74,31 +74,27 @@ namespace TakeIt.DAO
                     {
                         sqlConnection.Open();
                         command.CommandType = CommandType.StoredProcedure;
-                        //if (newPost.id == 0)
-                        //{
-                        //    command.Parameters.AddWithValue("@PostId", DBNull.Value);
-                        //}
-                        //else
-                        //{
-                        //    command.Parameters.AddWithValue("@PostId", newPost.id);
-                        //}
-                        //command.Parameters.AddWithValue("@PostContent", newPost.PostContent);
-                        //command.Parameters.AddWithValue("@GeneralImage", newPost.GeneralImage);
-                        //command.Parameters.AddWithValue("@Price", newPost.Price);
-                        //command.Parameters.AddWithValue("@Quantity", newPost.Quantity);
-                        //command.Parameters.AddWithValue("@CategoryId", newPost.CategoryId);
-                        //command.Parameters.AddWithValue("@Title", newPost.Title);
-                        //command.ExecuteNonQuery();
-                        //foreach(var p in newPost.SecondaryImageList)
-                        //{
-
-                        //}
-                        return true;
+                        if (newPost.id == 0)
+                        {
+                            command.Parameters.AddWithValue("@Id", DBNull.Value);
+                        }
+                        else
+                        {
+                            command.Parameters.AddWithValue("@Id", newPost.id);
+                        }
+                        command.Parameters.AddWithValue("@PostContent", newPost.PostContent);
+                        command.Parameters.AddWithValue("@UserId", newPost.UserId);
+                        command.Parameters.AddWithValue("@FromId", newPost.FromCountryId);
+                        command.Parameters.AddWithValue("@ToId", newPost.ToCountryId);
+                        command.Parameters.AddWithValue("@PostTime", newPost.PostTime);
+                        command.ExecuteNonQuery();
+                       
+                        return newPost;
                     }
                     catch (Exception ex)
                     {
                     }
-                    return false;
+                    return null;
                 }
             }
         }
