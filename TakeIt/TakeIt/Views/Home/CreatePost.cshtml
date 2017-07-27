@@ -5,6 +5,119 @@
     Layout = "~/Views/_LayoutPage.cshtml";
 }
 
-<h2>CreatePost</h2>
 
 
+@using (@Html.BeginForm("CreatePost", "Post", FormMethod.Post))
+{
+    <div class="container post_add_container">
+        <div class="row marginPost " id="pwd-container">
+            <div class="col-md-4 left-banner">Post Content</div>
+
+            <div class="col-md-4">
+                @Html.TextAreaFor(m => m.PostContent, new { @class = "form-control" })
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <div class="row marginPost" id="pwd-container">
+            <div class="col-md-4 left-banner"></div>
+            <div class="col-md-4">
+                <p>Post Time</p>
+                @Html.EditorFor(m => m.PostTime, new { @id = "news_date", @class = "form-control" })
+                <hr />
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        
+        <div class="row marginPost" id="pwd-container">
+            <div class="col-md-4 left-banner">From</div>
+            <div class="col-md-4">
+                <br />
+              <p>Country</p>
+                  @Html.DropDownListFor(m => m.FromCountryId,
+                new SelectList(ViewBag.Countries,
+                               "id", "Name"),
+                                "Select Country",
+              new { @class = "form-control", @onchange = "FillState(1)" })
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <div class="row marginPost stateContainer" id="pwd-container">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <p>State</p>
+@Html.DropDownListFor(m => m.FromStateId,
+       new SelectList(Enumerable.Empty<SelectListItem>(), "id", "Name"),
+              "Select State",
+                  new { @class = "form-control", @onchange = "FillCity(1)" })
+ </div>
+            <div class="col-md-4"></div>
+        </div>
+        <div class="row marginPost stateContainer" id="pwd-container">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+               <p>City</p> 
+                @Html.DropDownListFor(m => m.FromCityId,
+       new SelectList(Enumerable.Empty<SelectListItem>(), "id", "Name"),
+              "Select City",
+                  new { @class = "form-control" })
+                <hr />
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <div class="row marginPost" id="pwd-container">
+            <div class="col-md-4 left-banner">Destination</div>
+            <div class="col-md-4">
+                <br />
+                <p>Country</p>
+                @Html.DropDownListFor(m => m.ToCountryId,
+                new SelectList(ViewBag.Countries,
+                               "id", "Name"),
+                                "Select Country",
+              new { @class = "form-control", @onchange = "FillState(0)" })
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <div class="row marginPost stateContainer" id="pwd-container">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <p>State</p>
+                @Html.DropDownListFor(m => m.ToStateId,
+       new SelectList(Enumerable.Empty<SelectListItem>(), "id", "Name"),
+              "Select State",
+                  new { @class = "form-control", @onchange = "FillCity(0)" })
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <div class="row marginPost stateContainer" id="pwd-container">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <p>City</p>
+                @Html.DropDownListFor(m => m.ToCityId,
+       new SelectList(Enumerable.Empty<SelectListItem>(), "id", "Name"),
+              "Select City",
+                  new { @class = "form-control" })
+                <hr />
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <div class="row marginPost" id="pwd-container">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <input class="button-save"type="submit" name="SaveButton" value="Save" />
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        </div>
+}
+
+        <script>
+            $(document).ready(function () {
+                $("#PostTime").datetimepicker({
+                    controlType: 'select',
+                    oneLine: true,
+                    timeFormat: 'hh:mm tt'
+                });
+            });
+           
+        </script>
+<script src="~/scripts/dropdown-script.js"></script>

@@ -2,7 +2,26 @@
 
 @{
     ViewBag.Title = "UsertDetails";
+    Layout = "~/Views/_LayoutPage.cshtml";
 }
-
-<h2>@Model.Username</h2>
-Phone Number:  @Model.PhoneNumber
+<div class="container post_add_container">
+    <div class="row marginPost " id="pwd-container">
+        <div class="col-md-4">
+            <div class="row marginPost " id="pwd-container">
+                <div class="col-md-4">
+                    <h2>@Model.Username</h2>
+                </div>
+            </div>
+            <div class="row marginPost " id="pwd-container">
+                <div class="col-md-12">Phone Number:  @Model.PhoneNumber</div>
+            </div>
+        </div>
+        <div class="col-md-4 middle-banner"><img style="width:150px;" src="~/images/defaul-picture.jpeg" /></div>
+        <div class="col-md-4"><a href="PostDetails">Posts</a></div>
+    </div>
+    <div class="row marginPost " id="pwd-container">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+    </div>
+</div>  

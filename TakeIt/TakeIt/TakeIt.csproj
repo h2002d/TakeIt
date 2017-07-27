@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\TakeItController.cs" />
     <Compile Include="DAO\LocationDAO.cs" />
     <Compile Include="DAO\PostDAO.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\PostHelper.cs" />
     <Compile Include="Models\CookieSecurityProvider.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Post.cs" />
@@ -127,8 +129,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Global.asax" />
+    <Content Include="images\defaul-picture.jpeg" />
+    <Content Include="scripts\dropdown-script.js" />
     <Content Include="scripts\jquery-3.2.1.min.js" />
+    <Content Include="scripts\jquery-ui-timepicker-addon.js" />
+    <Content Include="scripts\jquery-ui.min.js" />
+    <Content Include="scripts\searchCriteria.js" />
     <Content Include="Styles\bootstrap.min.css" />
+    <Content Include="Styles\jquery-ui-timepicker-addon.css" />
+    <Content Include="Styles\jquery-ui.min.css" />
     <Content Include="Styles\Style.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -162,6 +171,8 @@
     <Content Include="Views\Home\SignUp.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\CreatePost.cshtml" />
+    <Content Include="Views\Post\PostPartial.cshtml" />
+    <Content Include="Views\Post\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,6 +1,104 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/_LayoutPage.cshtml";
 }
 
-<h2>TakeIt</h2>
+<div class="container post_add_container">
+    <div class="row" id="pwd-container">
+       
+        <div class="col-md-4 middle-banner">
+            <p>Location</p>
+            <div class="row margin-search" id="pwd-container">
+                <div class="col-md-12">
+                    @Html.DropDownList("FromCountryId",
+                new SelectList(ViewBag.Countries,
+                               "id", "Name"),
+                                "Select Country",
+              new { @class = "form-control", @onchange = "FillState(1)" })
+                </div>
+            </div>
+            <div class="row margin-search" id="pwd-container">
+                <div class="col-md-12">
+                    @Html.DropDownList("FromStateId",
+                new SelectList(Enumerable.Empty<SelectListItem>(),
+                               "id", "Name"),
+                                "Select State",
+              new { @class = "form-control", @onchange = "FillCity(1)" })
+                </div>
+            </div>
+            <div class="row margin-search" id="pwd-container">
+                <div class="col-md-12">
+                    @Html.DropDownList("FromCityId",
+                new SelectList(Enumerable.Empty<SelectListItem>(),
+                               "id", "Name"),
+                                "Select City",
+              new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+    <div class="col-md-4 middle-banner">
+        <p>  Destination</p>
+        <div class="row margin-search" id="pwd-container">
+           
+            <div class="col-md-12">
+                @Html.DropDownList("ToCountryId",
+                new SelectList(ViewBag.Countries,
+                               "id", "Name"),
+                                "Select Country",
+              new { @class = "form-control", @onchange = "FillState(0)" })
+            </div>
+        </div>
+        <div class="row margin-search" id="pwd-container">
+            <div class="col-md-12">
+                @Html.DropDownList("ToStateId",
+                new SelectList(Enumerable.Empty<SelectListItem>(),
+                               "id", "Name"),
+                                "Select State",
+              new { @class = "form-control", @onchange = "FillCity(0)" })
+            </div>
+        </div>
+        <div class="row margin-search" id="pwd-container">
+            <div class="col-md-12">
+                @Html.DropDownList("ToCityId",
+                new SelectList(Enumerable.Empty<SelectListItem>(),
+                               "id", "Name"),
+                                "Select City",
+              new { @class = "form-control" })
+            </div>
+        </div>
+
+</div>
+<div class="col-md-4">
+    <div class="row margin-search" id="pwd-container">
+        <div class="col-md-12">
+            <p>From</p>
+            <input type="datetime" id="fromDate" class="dateTimePicker" />
+        </div>
+    </div>
+    <div class="row" id="pwd-container">
+        <div class="col-md-12">
+            <p>To</p>
+            <input type="datetime" id="toDate" class="dateTimePicker" />
+        </div>
+    </div>
+        </div>
+</div>
+        <input type="button" class="button-save" onclick="filterPosts()" value="Filter" />
+</div>
+<div class="container" id="postContentMain">
+
+</div>
+<script src="~/scripts/dropdown-script.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".dateTimePicker").datetimepicker({
+            controlType: 'select',
+            oneLine: true,
+            timeFormat: 'hh:mm tt'
+        });
+        
+    });
+
+</script>
+<script src="~/scripts/searchCriteria.js"></script>

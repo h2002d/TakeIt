@@ -20,7 +20,7 @@ namespace TakeIt.Models
         {
 
         }
-        public User GetUserById(int id)
+        public static User GetUserById(int id)
         {
             return UserDAO.getUserById(id);
         }

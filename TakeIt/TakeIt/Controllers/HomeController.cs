@@ -15,13 +15,9 @@ namespace TakeIt.Controllers
         // GET: /Home/
 
         public ActionResult Index()
-        
         {
-            //bool val1 =  (System.Web.HttpContext.Current.User != null) && System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
-            //if (val1)
-            //    return RedirectToAction("SignUp");
-            //else
-                return View();
+            ViewBag.Countries = Location.GetCountries();
+            return View();
         }
 
         [HttpGet]
@@ -30,9 +26,17 @@ namespace TakeIt.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
         public ActionResult Login(string username, string password)
         {
+           
             int userId=TakeIt.Models.User.Login(username,password);
             if (userId.Equals(0))
                 throw new HttpUnhandledException();
@@ -64,9 +68,8 @@ namespace TakeIt.Controllers
 
         public ActionResult UserDetails(int id)
         {
-            User user = new User();
-            
-            return View(user.GetUserById(id));
+            User user = TakeIt.Models.User.GetUserById(id);           
+            return View(user);
         }
         //
         // GET: /Home/Create
@@ -89,31 +92,18 @@ namespace TakeIt.Controllers
                 return RedirectToAction("Registration");
             }
         }
-
+        [Authorize]
         [HttpGet]
         public ActionResult CreatePost()
         {
+            ViewBag.Countries = Location.GetCountries();
             return View();
         }
 
         //
         // POST: /Home/Create
 
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
+      
         //
         // GET: /Home/Edit/5
 

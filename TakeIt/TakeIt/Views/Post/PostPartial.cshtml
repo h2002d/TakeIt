@@ -1,0 +1,41 @@
+﻿@model List<TakeIt.Helpers.PostHelper>
+
+@foreach (var post in Model)
+{
+    
+    <div class="postContainer selectablePost" id="@post.id">
+        <div class="row" id="pwd-container">
+            <div class="col-md-6">
+               User: @post.Username
+            </div>
+            <div class="col-md-6 left-banner" style="font-size:15px">
+                Added on @post.CreateDate
+            </div>
+        </div>
+        <div class="row" id="pwd-container">
+            <div class="col-md-4">
+               <p class="headText">Location</p>
+                @post.FromCountryName,@post.FromStateName,@post.FromCityName;
+            </div>
+            <div class="col-md-4">
+                <p class="headText">Destination</p>
+                @post.ToCountryName,@post.ToStateName,@post.ToCityName;
+            </div>
+            <div class="col-md-4">
+                <p class="headText">Departure</p>
+                @post.PostTime;
+            </div>
+        </div>
+    </div>
+    <hr />
+   
+}
+<script>
+    $(document).ready(function () {
+        $(".selectablePost").click(function (event) {
+            var id = $(this).attr('id');
+            window.location.href = '/Post/' + id;
+            alert();
+        });
+    });
+</script>
